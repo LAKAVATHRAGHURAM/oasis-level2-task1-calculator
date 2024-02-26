@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><h1>Scientific Calculator</h1></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: rgb(231, 241, 241);
+        }
+        h1{
+            color:#211c1c;
+        }
+        
+        #calculator {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 4px solid hwb(132 8% 86%);
+            border-radius: 5px;
+        }
+        input[type="text"] {
+            width: 90%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 20px;
+        }
+        input[type="button"] {
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scientific Calculator</h1>
+    <div id="calculator">
+        <input type="text" id="display" disabled>
+        <br>
+        <input type="button" value="7" onclick="appendToDisplay('7')">
+        <input type="button" value="8" onclick="appendToDisplay('8')">
+        <input type="button" value="9" onclick="appendToDisplay('9')">
+        <input type="button" value="/" onclick="appendToDisplay('/')">
+        <input type="button" value="^" onclick="appendToDisplay('^')">
+
+        <br>
+        <input type="button" value="4" onclick="appendToDisplay('4')">
+        <input type="button" value="5" onclick="appendToDisplay('5')">
+        <input type="button" value="6" onclick="appendToDisplay('6')">
+        <input type="button" value="-" onclick="appendToDisplay('-')">
+        <input type="button" value="%" onclick="calculatePercentage()">
+
+        <br>
+        <input type="button" value="1" onclick="appendToDisplay('1')">
+        <input type="button" value="2" onclick="appendToDisplay('2')">
+        <input type="button" value="3" onclick="appendToDisplay('3')">
+        <input type="button" value="+" onclick="appendToDisplay('+')">
+        <input type="button" value="!" onclick="calculateFactorial()">
+
+        <br>
+        <input type="button" value="0" onclick="appendToDisplay('0')">
+        <input type="button" value="." onclick="appendToDisplay('.')">
+        <input type="button" value="=" onclick="calculate()">
+        <input type="button" value="C" onclick="clearDisplay()">
+        <input type="button" value="*" onclick="appendToDisplay('*')">
+
+        <br>
+        <input type="button" value="sin" onclick="calculateSin()">
+        <input type="button" value="cos" onclick="calculateCos()">
+        <input type="button" value="tan" onclick="calculateTan()">
+        <input type="button" value="sqrt" onclick="calculateSqrt()">
+        <input type="button" value="log" onclick="calculateLog()">
+
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function calculate() {
+            try {
+                const result = eval(document.getElementById('display').value);
+                document.getElementById('display').value = result;
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function calculateSin() {
+            const value = parseFloat(document.getElementById('display').value);
+            if (!isNaN(value)) {
+                document.getElementById('display').value = Math.sin(value);
+            } else {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function calculateCos() {
+            const value = parseFloat(document.getElementById('display').value);
+            if (!isNaN(value)) {
+                document.getElementById('display').value = Math.cos(value);
+            } else {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function calculateTan() {
+            const value = parseFloat(document.getElementById('display').value);
+            if (!isNaN(value)) {
+                document.getElementById('display').value = Math.tan(value);
+            } else {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function calculateSqrt() {
+            const value = parseFloat(document.getElementById('display').value);
+            if (!isNaN(value)) {
+                document.getElementById('display').value = Math.sqrt(value);
+            } else {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function calculateLog() {
+            const value = parseFloat(document.getElementById('display').value);
+            if (!isNaN(value) && value > 0) {
+                document.getElementById('display').value = Math.log10(value);
+            } else {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function calculate() {
+            try {
+                const expression = document.getElementById('display').value;
+                const result = eval(expression);
+                document.getElementById('display').value = result;
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+        
+        function calculateFactorial() {
+            const value = parseFloat(document.getElementById('display').value);
+        
+            if (!isNaN(value) && value >= 0 && Number.isInteger(value)) {
+                let result = 1;
+                for (let i = 2; i <= value; i++) {
+                    result *= i;
+                }
+                document.getElementById('display').value = result;
+            } else {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+        
+        function calculate() {
+            try {
+                const expression = document.getElementById('display').value;
+                // Replace "^" with "**" for exponentiation in the expression
+                const correctedExpression = expression.replace("^", "**");
+                const result = eval(correctedExpression);
+                document.getElementById('display').value = result;
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function calculatePercentage() {
+            const value = parseFloat(document.getElementById('display').value);
+        
+            if (!isNaN(value)) {
+                document.getElementById('display').value = value / 100;
+            } else {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+        
+    </script>
+</body>
+</html>
